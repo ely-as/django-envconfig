@@ -2,8 +2,9 @@ from importlib import import_module
 from importlib.machinery import SourceFileLoader
 from importlib.util import spec_from_loader, module_from_spec
 from pathlib import Path
+import sys
 from types import ModuleType
-from typing import Union
+from typing import List, Union
 
 import django
 from django.core.management.utils import get_random_secret_key
@@ -18,6 +19,23 @@ TEMPLATE_SETTINGS_IGNORE = (
     'DEBUG',      # Defaults to True - we force it to False
     'SECRET_KEY'  # Needs to be generated
 )
+
+
+def find_paths_to_project_root() -> List[Path]:
+    """Try to find the project root without knowing the project name."""
+    for arg in sys.argv:
+        if arg.endswith('.asgi:application') or arg.endswith('.wsgi'):
+            try:
+                return [get_base_dir(arg.split('.')[0])]
+            except ModuleNotFound:
+                pass
+        if arg.endswith('manage.py'):
+            return [Path(arg).parent.absolute()]
+    return []
+
+
+def get_base_dir(project_name: str) -> Path:
+    return Path(import_module(project_name).__file__).parent.parent.absolute()
 
 
 def get_module_settings(project_name: str) -> dict:
@@ -46,9 +64,7 @@ def get_template_settings(project_name: str) -> dict:
             val = val.replace('{{ project_name }}', project_name)
         settings[s] = val
     # Set some defaults of our own
-    settings['BASE_DIR'] = (
-        Path(import_module(project_name).__file__).parent.parent
-    )
+    settings['BASE_DIR'] = get_base_dir(project_name)
     settings['DEBUG'] = False  # Ensure DEBUG defaults to False
     settings['SECRET_KEY'] = get_random_secret_key()
     return settings

@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from typing import List, Optional, Union
 
 from dotenv import find_dotenv as _find_dotenv
 
@@ -7,7 +8,8 @@ from dotenv import find_dotenv as _find_dotenv
 def find_dotenv(
     filename: str = '.env',
     raise_error_if_not_found: bool = False,
-    usecwd: bool = False
+    usecwd: bool = False,
+    extra_paths: Optional[List[Union[Path, str]]] = None,
 ) -> str:
     """Find the path to a relevant dotenv file, or return an empty string.
 
@@ -21,10 +23,12 @@ def find_dotenv(
         if raise_error_if_not_found:
             pass
     # If find_dotenv doesn't find a dotenv file, check the execution paths
-    # and their parent directories
+    # (and extra paths if provided) and their parent directories
     if not dotenv_path:
-        for exec_path in os.get_exec_path():
-            path = Path(exec_path)
+        if extra_paths is None:
+            extra_paths = []
+        paths = [Path(p) for p in extra_paths + os.get_exec_path()]
+        for path in paths:
             while path.as_posix() != '/' and not dotenv_path:
                 if (path / filename).is_file():
                     dotenv_path = (path / filename).as_posix()

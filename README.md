@@ -28,8 +28,9 @@ export DJANGO_PROJECT=my_project_name
 In the absence of a `settings.py` file the following environment variables are
 required: `ALLOWED_HOSTS` and either `DATABASES` or `PGDATABASE`.
 
-Environments may be stored in an `.env` file. This file can be stored anywhere
-on the path, for example, in your virtualenv directory.
+Environments may be stored in an `.env` file. This file can be stored in your
+root directory (same as `manage.py`) or anywhere on the path (e.g. virtualenv
+directory).
 
 ## How it works
 

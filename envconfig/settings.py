@@ -9,7 +9,8 @@ from envconfig.parser import EnvParser
 from envconfig.setting_types import setting_types
 from envconfig import utils
 
-load_dotenv(dotenv_path=find_dotenv())
+extra_paths = utils.find_paths_to_project_root()
+load_dotenv(dotenv_path=find_dotenv(extra_paths=extra_paths))
 
 project_name = getenv('DJANGO_PROJECT')
 if not project_name:
