@@ -1,7 +1,8 @@
 # django-envconfig
 
-![Python](https://img.shields.io/pypi/pyversions/django-envconfig)
 ![Test](https://github.com/ely-as/django-envconfig/workflows/Test/badge.svg)
+![Python](https://img.shields.io/pypi/pyversions/django-envconfig)
+![Django](https://img.shields.io/pypi/djversions/django-envconfig)
 ![License](https://img.shields.io/pypi/l/django-envconfig)
 
 Configure Django using environment variables. Having a `settings.py` file is
