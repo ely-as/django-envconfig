@@ -27,7 +27,7 @@ def find_paths_to_project_root() -> List[Path]:
         if arg.endswith('.asgi:application') or arg.endswith('.wsgi'):
             try:
                 return [get_base_dir(arg.split('.')[0])]
-            except ModuleNotFound:
+            except ModuleNotFoundError:
                 pass
         if arg.endswith('manage.py'):
             return [Path(arg).parent.absolute()]
