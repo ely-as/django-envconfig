@@ -36,7 +36,7 @@ for name in settings:
 if 'DATABASES' not in settings and getenv('PGDATABASE'):
     settings['DATABASES'] = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.postgresql',
             'NAME': getenv('PGDATABASE'),
             'USER': getenv('PGUSER', ''),
             'PASSWORD': getenv('PGPASSWORD', ''),
