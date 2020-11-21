@@ -47,6 +47,10 @@ class EnvParser:
 
     @classmethod
     def _int(cls, val: str) -> int:
+        if val.startswith('0o'):
+            return int(val, 8)
+        elif val.startswith('0x'):
+            return int(val, 16)
         return int(val)
 
     @classmethod
