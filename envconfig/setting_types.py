@@ -39,6 +39,7 @@ setting_types: Dict[str, List[type]] = {
     'DEBUG_PROPAGATE_EXCEPTIONS': [bool],
     'DECIMAL_SEPARATOR': [str],
     'DEFAULT_CHARSET': [str],
+    'DEFAULT_CONTENT_TYPE': [str],  # deprecated v2.0, removed v3.0
     'DEFAULT_EXCEPTION_REPORTER': [str],
     'DEFAULT_EXCEPTION_REPORTER_FILTER': [str],
     'DEFAULT_FILE_STORAGE': [str],
@@ -94,6 +95,7 @@ setting_types: Dict[str, List[type]] = {
     'MEDIA_URL': [str],
     'MESSAGE_STORAGE': [str],
     'MIDDLEWARE': [type(None), list],
+    'MIDDLEWARE_CLASSES': [list],  # deprecated v1.10, removed v2.0
     'MIGRATION_MODULES': [dict],
     'MONTH_DAY_FORMAT': [str],
     'NUMBER_GROUPING': [int],
@@ -143,6 +145,7 @@ setting_types: Dict[str, List[type]] = {
     'TIME_FORMAT': [str],
     'TIME_INPUT_FORMATS': [list],
     'TIME_ZONE': [type(None), str],
+    'USE_ETAGS': [bool],  # deprecated v1.11, removed v2.1
     'USE_I18N': [bool],
     'USE_L10N': [bool],
     'USE_THOUSAND_SEPARATOR': [bool],
