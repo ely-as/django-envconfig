@@ -138,7 +138,7 @@ setting_types: Dict[str, List[type]] = {
     'STATIC_ROOT': [type(None), str],
     'STATIC_URL': [type(None), str],
     'TEMPLATES': [list],
-    # 'TEMPLATE_DIRS': [list],  # deprecated v1.8
+    # 'TEMPLATE_DIRS': [list],  # deprecated v1.8, removed v1.10
     'TEST_NON_SERIALIZED_APPS': [list],
     'TEST_RUNNER': [str],
     'THOUSAND_SEPARATOR': [str],
