@@ -24,7 +24,8 @@ if project_name not in settings['INSTALLED_APPS']:
     settings['INSTALLED_APPS'].append(project_name)
 
 for name in settings:
-    if val := getenv(name):
+    val = getenv(name)
+    if val:
         try:
             settings[name] = EnvParser.parse(val, *setting_types[name])
         except ValueError:
