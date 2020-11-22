@@ -38,14 +38,15 @@ envsetting_names = [s for s in setting_types if s in environ]
 
 for name in envsetting_names:
     val = getenv(name)
-    try:
-        settings[name] = EnvParser.parse(val, *setting_types[name])
-    except ValueError as e:
-        types_str = "', '".join(t.__name__ for t in setting_types[name])
-        raise ImproperlyConfigured(
-            f"Environment variable '{name}' incorrectly set. "
-            f"Error: {str(e)}. Valid types include: '{types_str}'."
-        )
+    if val:
+        try:
+            settings[name] = EnvParser.parse(val, *setting_types[name])
+        except ValueError as e:
+            types_str = "', '".join(t.__name__ for t in setting_types[name])
+            raise ImproperlyConfigured(
+                f"Environment variable '{name}' incorrectly set. "
+                f"Error: {str(e)}. Valid types include: '{types_str}'."
+            )
 
 # PostgreSQL
 # https://www.postgresql.org/docs/current/libpq-envars.html
