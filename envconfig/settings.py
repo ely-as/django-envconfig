@@ -1,4 +1,4 @@
-from os import getenv
+from os import environ, getenv
 import sys
 
 from django.core.exceptions import ImproperlyConfigured
@@ -34,17 +34,18 @@ setting_types.update({
 if project_name not in settings['INSTALLED_APPS']:
     settings['INSTALLED_APPS'].append(project_name)
 
-for name in settings:
+envsetting_names = [s for s in setting_types if s in environ]
+
+for name in envsetting_names:
     val = getenv(name)
-    if val:
-        try:
-            settings[name] = EnvParser.parse(val, *setting_types[name])
-        except ValueError as e:
-            types_str = "', '".join(t.__name__ for t in setting_types[name])
-            raise ImproperlyConfigured(
-                f"Environment variable '{name}' incorrectly set. "
-                f"Error: {str(e)}. Valid types include: '{types_str}'."
-            )
+    try:
+        settings[name] = EnvParser.parse(val, *setting_types[name])
+    except ValueError as e:
+        types_str = "', '".join(t.__name__ for t in setting_types[name])
+        raise ImproperlyConfigured(
+            f"Environment variable '{name}' incorrectly set. "
+            f"Error: {str(e)}. Valid types include: '{types_str}'."
+        )
 
 # PostgreSQL
 # https://www.postgresql.org/docs/current/libpq-envars.html
