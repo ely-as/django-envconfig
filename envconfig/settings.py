@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from envconfig.dotenv import find_dotenv
 from envconfig.parser import EnvParser
-from envconfig.setting_types import setting_types
+from envconfig.setting_types import get_setting_types
 from envconfig import utils
 
 extra_paths = utils.find_paths_to_project_root()
@@ -17,8 +17,19 @@ if not project_name:
     raise ImproperlyConfigured("Required environment variable "
                                "'DJANGO_PROJECT' not found.")
 
+# Generate default settings and values from startproject template settings.py
 settings = utils.get_template_settings(project_name)
-settings.update(utils.get_module_settings(project_name))
+# Load any settings from the project_name.settings module (if it exists)
+mod_settings = utils.get_module_settings(project_name)
+# Overlay the default template settings with any settings module settings
+settings.update(mod_settings)
+
+# Get a lookup of built-in Django settings and their valid types
+setting_types = get_setting_types()
+# Add any custom settings and their default types
+setting_types.update({
+    s: [type(mod_settings[s])] for s in mod_settings if s not in setting_types
+})
 
 if project_name not in settings['INSTALLED_APPS']:
     settings['INSTALLED_APPS'].append(project_name)

@@ -4,7 +4,7 @@ from typing import Dict, List
 # defining setting types. For example, JSON does not support storing Python
 # tuples, but settings like ADMINS (i.e. List[Tuple[str, str]]) may require
 # list elements to be cast to tuple.
-setting_types: Dict[str, List[type]] = {
+_setting_types: Dict[str, List[type]] = {
     'ABSOLUTE_URL_OVERRIDES': [dict],
     'ADMINS': [list],
     'ALLOWED_HOSTS': [list],
@@ -156,3 +156,7 @@ setting_types: Dict[str, List[type]] = {
     'X_FRAME_OPTIONS': [str],
     'YEAR_MONTH_FORMAT': [str],
 }
+
+
+def get_setting_types():
+    return _setting_types.copy()
