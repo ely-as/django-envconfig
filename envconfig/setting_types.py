@@ -38,6 +38,7 @@ _setting_types: Dict[str, List[type]] = {
     'DEBUG': [bool],
     'DEBUG_PROPAGATE_EXCEPTIONS': [bool],
     'DECIMAL_SEPARATOR': [str],
+    'DEFAULT_AUTO_FIELD': [str],
     'DEFAULT_CHARSET': [str],
     'DEFAULT_CONTENT_TYPE': [str],  # deprecated v2.0, removed v3.0
     'DEFAULT_EXCEPTION_REPORTER': [str],
