@@ -8,7 +8,7 @@ with open(Path(__file__).parent / 'README.md') as f:
 setup(
     name='django-envconfig',
     packages=find_packages(exclude=['tests']),
-    version='0.1.2',
+    version='0.1.3',
     license='MIT',
     description='Configure Django using environment variables.',
     long_description=long_description,
@@ -43,5 +43,6 @@ setup(
         'Framework :: Django :: 2.2',
         'Framework :: Django :: 3.0',
         'Framework :: Django :: 3.1',
+        'Framework :: Django :: 3.2',
     ],
 )

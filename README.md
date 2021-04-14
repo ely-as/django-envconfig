@@ -38,7 +38,7 @@ directory).
 
 ## How it works
 
-Any [Django setting](https://docs.djangoproject.com/en/3.1/ref/settings/) can
+Any [Django setting](https://docs.djangoproject.com/en/3.2/ref/settings/) can
 be configured as an environment variable.
 - To set booleans: `true|yes|on|1` and `false|no|off|0` (case-insensitive)
 - To set `None`: `none|null` (case-insensitive)
