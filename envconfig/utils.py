@@ -63,8 +63,12 @@ def get_template_settings(project_name: str) -> dict:
         if isinstance(val, str) and '{{ project_name }}' in val:
             val = val.replace('{{ project_name }}', project_name)
         settings[s] = val
+    # Find the correct BASE_DIR
+    base_dir = get_base_dir(project_name)
+    if isinstance(settings['BASE_DIR'], str):
+        base_dir = base_dir.as_posix()
     # Set some defaults of our own
-    settings['BASE_DIR'] = get_base_dir(project_name)
+    settings['BASE_DIR'] = base_dir
     settings['DEBUG'] = False  # Ensure DEBUG defaults to False
     settings['SECRET_KEY'] = get_random_secret_key()
     return settings
