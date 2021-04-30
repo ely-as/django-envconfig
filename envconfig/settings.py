@@ -68,7 +68,7 @@ for name in envsetting_names:
 
 # PostgreSQL
 # https://www.postgresql.org/docs/current/libpq-envars.html
-if 'DATABASES' not in settings and getenv('PGDATABASE'):
+if getenv('PGDATABASE'):
     settings['DATABASES'] = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',

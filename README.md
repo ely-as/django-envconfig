@@ -24,7 +24,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'envconfig.settings')
 ### Minimum configuration
 The following envvars are required (if `settings.py` is removed):
 - `ALLOWED_HOSTS` (unless you set `DEBUG=on`)
-- `DATABASES` *or* `PGDATABASE`
 
 Environments may be stored in an `.env` file. This file can be stored in your
 root directory (next to `manage.py`) or anywhere on the path (e.g. virtualenv
@@ -61,7 +60,7 @@ Settings are loaded with the following priority (highest first):
      environment variable.
 
 If you are using a PostgreSQL backend you do not need to set `DATABASES`. You
-can simply set PostgreSQL environment variables - the minimum is `PGDATABASE`
+can simply set PostgreSQL environment variables - the minimum is `PGDATABASE`.
 See the
 [PostgreSQL docs](https://www.postgresql.org/docs/current/libpq-envars.html)
 for the full list of envvars. This way the same environment can be used when

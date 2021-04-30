@@ -11,13 +11,6 @@ from django.core.management.utils import get_random_secret_key
 # Relative path to settings.py template from django package root dir
 RELPATH_TO_SETTINGS_TPL = 'conf/project_template/project_name/settings.py-tpl'
 
-# Settings which are in the settings.py template, but we ignore
-TEMPLATE_SETTINGS_IGNORE = (
-    'BASE_DIR',   # Will find an incorrect dir, so omit
-    'DATABASES',  # Depends on BASE_DIR, see above
-    'DEBUG',      # Defaults to True - we force it to False
-    'SECRET_KEY'  # Needs to be generated
-)
 
 def find_project_name(path: Path) -> str:
     search = list(set(
@@ -48,8 +41,7 @@ def get_template_settings(project_name: str) -> dict:
     template_settings = import_module_from_file(
         get_path_to_settings_template()
     )
-    setting_names = [s for s in dir(template_settings) if s.isupper()
-                     and s not in TEMPLATE_SETTINGS_IGNORE]
+    setting_names = [s for s in dir(template_settings) if s.isupper()]
     settings = {}
     for s in setting_names:
         val = getattr(template_settings, s)
@@ -58,10 +50,18 @@ def get_template_settings(project_name: str) -> dict:
         settings[s] = val
     # Find the correct BASE_DIR
     base_dir = get_base_dir(project_name)
+    # Modify the DATABASES setting for correct BASE_DIR
+    db_name = settings['DATABASES']['default']['NAME']
+    if not isinstance(db_name, Path):
+        db_name = Path(db_name)
+    db_name = base_dir / db_name.name
+    # Overwite some of the defaults
     if isinstance(settings['BASE_DIR'], str):
-        base_dir = base_dir.as_posix()
-    # Set some defaults of our own
-    settings['BASE_DIR'] = base_dir
+        settings['BASE_DIR'] = base_dir.as_posix()
+        settings['DATABASES']['default']['NAME'] = db_name.as_posix()
+    else:
+        settings['BASE_DIR'] = base_dir
+        settings['DATABASES']['default']['NAME'] = db_name
     settings['DEBUG'] = False  # Ensure DEBUG defaults to False
     settings['SECRET_KEY'] = get_random_secret_key()
     return settings
