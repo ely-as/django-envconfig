@@ -2,9 +2,8 @@ from importlib import import_module
 from importlib.machinery import SourceFileLoader
 from importlib.util import spec_from_loader, module_from_spec
 from pathlib import Path
-import sys
 from types import ModuleType
-from typing import List, Union
+from typing import Union
 
 import django
 from django.core.management.utils import get_random_secret_key
@@ -20,18 +19,12 @@ TEMPLATE_SETTINGS_IGNORE = (
     'SECRET_KEY'  # Needs to be generated
 )
 
-
-def find_paths_to_project_root() -> List[Path]:
-    """Try to find the project root without knowing the project name."""
-    for arg in sys.argv:
-        if arg.endswith('.asgi:application') or arg.endswith('.wsgi'):
-            try:
-                return [get_base_dir(arg.split('.')[0])]
-            except ModuleNotFoundError:
-                pass
-        if arg.endswith('manage.py'):
-            return [Path(arg).parent.absolute()]
-    return []
+def find_project_name(path: Path) -> str:
+    search = list(set(
+        p.parent.name for p in path.glob('*/[a|w]sgi.py')
+        if p.parent.is_dir()
+    ))
+    return search[0] if len(search) == 1 else None
 
 
 def get_base_dir(project_name: str) -> Path:

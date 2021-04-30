@@ -1,4 +1,5 @@
 from os import environ, getenv
+from pathlib import Path
 import sys
 
 from django.core.exceptions import ImproperlyConfigured
@@ -9,13 +10,30 @@ from envconfig.parser import EnvParser
 from envconfig.setting_types import get_setting_types
 from envconfig import utils
 
-extra_paths = utils.find_paths_to_project_root()
+# Based on the command line arguments try and infer the project name and
+# the path to the base directory (to look for .env)
+project_name = None
+extra_paths = []
+for arg in sys.argv:
+    if arg.endswith('.asgi:application') or arg.endswith('.wsgi'):
+        project_name = arg.split('.')[0]
+        try:
+            extra_paths.append(utils.get_base_dir(project_name))
+        except ModuleNotFoundError:
+            pass
+    if arg.endswith('manage.py'):
+        base_dir = Path(arg).parent.absolute()
+        project_name = utils.find_project_name(base_dir)
+        extra_paths.append(base_dir)
+
 load_dotenv(dotenv_path=find_dotenv(extra_paths=extra_paths))
 
-project_name = getenv('DJANGO_PROJECT')
+project_name = getenv('DJANGO_PROJECT', project_name)
 if not project_name:
-    raise ImproperlyConfigured("Required environment variable "
-                               "'DJANGO_PROJECT' not found.")
+    raise ImproperlyConfigured(
+        "Could not find Django project (i.e. module with wsgi.py or asgi.py). "
+        "Please set environment variable 'DJANGO_PROJECT'."
+    )
 
 # Generate default settings and values from startproject template settings.py
 settings = utils.get_template_settings(project_name)
