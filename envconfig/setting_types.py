@@ -21,7 +21,7 @@ _setting_types: Dict[str, List[type]] = {
     'CSRF_COOKIE_HTTPONLY': [bool],
     'CSRF_COOKIE_NAME': [str],
     'CSRF_COOKIE_PATH': [str],
-    'CSRF_COOKIE_SAMESITE': [str],  # 'None' is a valid str value, so don't coerce to NoneType  # noqa
+    'CSRF_COOKIE_SAMESITE': [str],  # 'None' is a valid str value, so don't coerce to NoneType  # noqa: E501
     'CSRF_COOKIE_SECURE': [bool],
     'CSRF_FAILURE_VIEW': [str],
     'CSRF_HEADER_NAME': [str],
@@ -112,7 +112,7 @@ _setting_types: Dict[str, List[type]] = {
     'SECURE_HSTS_SECONDS': [int],
     'SECURE_PROXY_SSL_HEADER': [type(None), tuple],
     'SECURE_REDIRECT_EXEMPT': [list],
-    'SECURE_REFERRER_POLICY': [type(None), str],  # v3.0 default None, v3.1 default str  # noqa
+    'SECURE_REFERRER_POLICY': [type(None), str],  # v3.0 default None, v3.1 default str  # noqa: E501
     'SECURE_SSL_HOST': [type(None), str],
     'SECURE_SSL_REDIRECT': [bool],
     'SERVER_EMAIL': [str],
@@ -122,7 +122,7 @@ _setting_types: Dict[str, List[type]] = {
     'SESSION_COOKIE_HTTPONLY': [bool],
     'SESSION_COOKIE_NAME': [str],
     'SESSION_COOKIE_PATH': [str],
-    'SESSION_COOKIE_SAMESITE': [str, bool],  # 'None' is a valid str value, so don't coerce to NoneType  # noqa
+    'SESSION_COOKIE_SAMESITE': [str, bool],  # 'None' is a valid str value, so don't coerce to NoneType  # noqa: E501
     'SESSION_COOKIE_SECURE': [bool],
     'SESSION_ENGINE': [str],
     'SESSION_EXPIRE_AT_BROWSER_CLOSE': [bool],
