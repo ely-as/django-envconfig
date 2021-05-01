@@ -66,19 +66,33 @@ for name in envsetting_names:
                 f"Error: {str(e)}. Valid types include: '{types_str}'."
             )
 
+# django-envconfig settings
+settings['INSTALLED_APPS'] = utils.modify_list(
+    settings['INSTALLED_APPS'],
+    add=settings.get('ADD_INSTALLED_APPS', []),
+    remove=settings.get('REMOVE_INSTALLED_APPS', [])
+)
+# Respect that MIDDLEWARE can be None
+if settings['MIDDLEWARE'] is not None or settings.get('ADD_MIDDLEWARE'):
+    settings['MIDDLEWARE'] = utils.modify_list(
+        settings.get('MIDDLEWARE') or [],
+        add=settings.get('ADD_MIDDLEWARE', []),
+        remove=settings.get('REMOVE_MIDDLEWARE', [])
+    )
+
 # PostgreSQL
 # https://www.postgresql.org/docs/current/libpq-envars.html
-if getenv('PGDATABASE'):
+if 'PGDATABASE' in settings:
     settings['DATABASES'] = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': getenv('PGDATABASE'),
-            'USER': getenv('PGUSER', ''),
-            'PASSWORD': getenv('PGPASSWORD', ''),
-            'HOST': getenv('PGHOST', ''),
-            'PORT': getenv('PGPORT', ''),
+            'NAME': settings.get('PGDATABASE'),
+            'USER': settings.pop('PGUSER', ''),
+            'PASSWORD': settings.pop('PGPASSWORD', ''),
+            'HOST': settings.pop('PGHOST', ''),
+            'PORT': settings.pop('PGPORT', ''),
             'TEST': {
-                'NAME': 'test_' + getenv('PGDATABASE', ''),
+                'NAME': 'test_' + settings.pop('PGDATABASE'),
             }
         }
     }

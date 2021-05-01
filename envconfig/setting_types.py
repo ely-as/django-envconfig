@@ -156,6 +156,17 @@ _setting_types: Dict[str, List[type]] = {
     'WSGI_APPLICATION': [type(None), str],
     'X_FRAME_OPTIONS': [str],
     'YEAR_MONTH_FORMAT': [str],
+
+    # django-envconfig settings
+    'ADD_INSTALLED_APPS': [list],
+    'REMOVE_INSTALLED_APPS': [list],
+    'ADD_MIDDLEWARE': [list],
+    'REMOVE_MIDDLEWARE': [list],
+    'PGDATABASE': [str],
+    'PGUSER': [str],
+    'PGPASSWORD': [str],
+    'PGHOST': [str],
+    'PGPORT': [int],
 }
 
 

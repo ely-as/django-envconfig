@@ -3,7 +3,7 @@ from importlib.machinery import SourceFileLoader
 from importlib.util import spec_from_loader, module_from_spec
 from pathlib import Path
 from types import ModuleType
-from typing import Optional, Union
+from typing import List, Optional, Union
 
 import django
 from django.core.management.utils import get_random_secret_key
@@ -78,3 +78,13 @@ def import_module_from_file(path: Union[Path, str]) -> ModuleType:
     mod = module_from_spec(spec)
     spec.loader.exec_module(mod)  # type: ignore  # noqa
     return mod
+
+
+def modify_list(
+    list_: List[str], add: List[str], remove: List[str]
+) -> List[str]:
+    """Add and remove items from a list. Preserve order and prevent
+    duplication.
+    """
+    return ([a for a in list_ if a not in remove]
+            + [a for a in add if a not in list_])

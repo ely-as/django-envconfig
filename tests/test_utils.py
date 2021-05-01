@@ -30,3 +30,9 @@ def test_import_module_from_file() -> None:
 def test_import_module_from_file_with_str() -> None:
     mod = utils.import_module_from_file(PATH_TO_TEST_TEMPLATE.as_posix())
     assert mod.FOO == 'bar'  # type: ignore  # noqa
+
+
+def test_modify_list() -> None:
+    list_ = ['1', '2', '3', '4']
+    modified_list = utils.modify_list(list_, add=['3', '5'], remove=['2', '6'])
+    assert modified_list == ['1', '3', '4', '5']
