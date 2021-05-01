@@ -14,7 +14,7 @@ def test_get_template_settings_sets_correct_type_for_BASE_DIR(mocker: MockerFixt
     mocker.patch('envconfig.utils.get_base_dir',
                  return_value=Path('/path/to/base_dir'))
     base_dir = utils.get_template_settings('foobar')['BASE_DIR']
-    assert type(default_template_settings.BASE_DIR) == type(base_dir)
+    assert type(default_template_settings.BASE_DIR) == type(base_dir)  # type: ignore  # noqa
 
 
 def test_target_template_settings_file_exists():
