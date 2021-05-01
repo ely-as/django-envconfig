@@ -17,16 +17,16 @@ def test_get_template_settings_sets_correct_type_for_BASE_DIR(mocker: MockerFixt
     assert type(default_template_settings.BASE_DIR) == type(base_dir)  # type: ignore  # noqa
 
 
-def test_target_template_settings_file_exists():
+def test_target_template_settings_file_exists() -> None:
     path = utils.get_path_to_settings_template()
     assert path.exists()
 
 
-def test_import_module_from_file():
+def test_import_module_from_file() -> None:
     mod = utils.import_module_from_file(PATH_TO_TEST_TEMPLATE)
-    assert mod.FOO == 'bar'
+    assert mod.FOO == 'bar'  # type: ignore  # noqa
 
 
-def test_import_module_from_file_with_str():
+def test_import_module_from_file_with_str() -> None:
     mod = utils.import_module_from_file(PATH_TO_TEST_TEMPLATE.as_posix())
-    assert mod.FOO == 'bar'
+    assert mod.FOO == 'bar'  # type: ignore  # noqa
