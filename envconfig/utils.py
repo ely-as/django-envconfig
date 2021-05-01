@@ -57,8 +57,8 @@ def get_template_settings(project_name: str) -> dict:
     db_name = base_dir / db_name.name
     # Overwite some of the defaults
     if isinstance(settings['BASE_DIR'], str):
-        settings['BASE_DIR'] = base_dir.as_posix()
-        settings['DATABASES']['default']['NAME'] = db_name.as_posix()
+        settings['BASE_DIR'] = str(base_dir.resolve())
+        settings['DATABASES']['default']['NAME'] = str(db_name.resolve())
     else:
         settings['BASE_DIR'] = base_dir
         settings['DATABASES']['default']['NAME'] = db_name
@@ -74,7 +74,7 @@ def import_module_from_file(path: Union[Path, str]) -> ModuleType:
     if isinstance(path, str):
         path = Path(path)
     name = path.name.split('.')[0]
-    spec = spec_from_loader(name, SourceFileLoader(name, path.as_posix()))
+    spec = spec_from_loader(name, SourceFileLoader(name, str(path.resolve())))
     mod = module_from_spec(spec)
     spec.loader.exec_module(mod)  # type: ignore  # noqa
     return mod

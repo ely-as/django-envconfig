@@ -4,6 +4,8 @@ from typing import Optional, Sequence, Union
 
 from dotenv import find_dotenv as _find_dotenv
 
+MAX_DEPTH: int = 10
+
 
 def find_dotenv(
     filename: str = '.env',
@@ -28,10 +30,17 @@ def find_dotenv(
         paths = [Path(p) for p in extra_paths] if extra_paths else []
         paths += [Path(p) for p in os.get_exec_path()]
         for path in paths:
-            while path.as_posix() != '/' and not dotenv_path:
+            i = 0
+            while (
+                path.resolve() != path.resolve().parent
+                and i < MAX_DEPTH
+                and not dotenv_path
+            ):
+                i += 1
                 if (path / filename).is_file():
-                    dotenv_path = (path / filename).as_posix()
+                    dotenv_path = str((path / filename).resolve())
                 path = path.parent
+            # Return the first dotenv we find
             if dotenv_path:
                 break
     if not dotenv_path and raise_error_if_not_found:

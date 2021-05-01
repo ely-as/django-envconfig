@@ -28,7 +28,7 @@ def test_import_module_from_file() -> None:
 
 
 def test_import_module_from_file_with_str() -> None:
-    mod = utils.import_module_from_file(PATH_TO_TEST_TEMPLATE.as_posix())
+    mod = utils.import_module_from_file(str(PATH_TO_TEST_TEMPLATE.resolve()))
     assert mod.FOO == 'bar'  # type: ignore  # noqa
 
 
