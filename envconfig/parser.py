@@ -24,7 +24,8 @@ class EnvParser:
             except ValueError:
                 if i < len(types_):
                     pass
-                raise
+                else:
+                    raise
 
     @classmethod
     def _bool(cls, val: str) -> bool:
