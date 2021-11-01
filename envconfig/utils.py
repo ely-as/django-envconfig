@@ -75,7 +75,7 @@ def import_module_from_file(path: Union[Path, str]) -> ModuleType:
         path = Path(path)
     name = path.name.split('.')[0]
     spec = spec_from_loader(name, SourceFileLoader(name, str(path.resolve())))
-    mod = module_from_spec(spec)
+    mod = module_from_spec(spec)  # type: ignore  # noqa
     spec.loader.exec_module(mod)  # type: ignore  # noqa
     return mod
 
