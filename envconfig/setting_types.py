@@ -110,6 +110,7 @@ _setting_types: Dict[str, List[type]] = {
     'SECURE_HSTS_INCLUDE_SUBDOMAINS': [bool],
     'SECURE_HSTS_PRELOAD': [bool],
     'SECURE_HSTS_SECONDS': [int],
+    'SECURE_CROSS_ORIGIN_OPENER_POLICY': [type(None), str],
     'SECURE_PROXY_SSL_HEADER': [type(None), tuple],
     'SECURE_REDIRECT_EXEMPT': [list],
     'SECURE_REFERRER_POLICY': [type(None), str],  # v3.0 default None, v3.1 default str  # noqa: E501
@@ -146,6 +147,7 @@ _setting_types: Dict[str, List[type]] = {
     'TIME_FORMAT': [str],
     'TIME_INPUT_FORMATS': [list],
     'TIME_ZONE': [type(None), str],
+    'USE_DEPRECATED_PYTZ': [bool],  # introduced v4.0, will be removed v5.0
     'USE_ETAGS': [bool],  # deprecated v1.11, removed v2.1
     'USE_I18N': [bool],
     'USE_L10N': [bool],
