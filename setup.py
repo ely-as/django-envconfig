@@ -8,7 +8,7 @@ with open(Path(__file__).parent / 'README.md') as f:
 setup(
     name='django-envconfig',
     packages=find_packages(exclude=['tests']),
-    version='0.2.3',
+    version='0.2.4',
     license='MIT',
     description='Configure Django using environment variables.',
     long_description=long_description,
