@@ -21,7 +21,8 @@ def find_project_name(path: Path) -> Optional[str]:
 
 
 def get_base_dir(project_name: str) -> Path:
-    return Path(import_module(project_name).__file__).parent.parent.absolute()
+    mod = import_module(project_name)
+    return Path(mod.__file__).parent.parent.absolute()  # type: ignore  # noqa
 
 
 def get_module_settings(project_name: str) -> dict:
