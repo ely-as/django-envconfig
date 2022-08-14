@@ -19,6 +19,7 @@ _setting_types: Dict[str, List[type]] = {
     'CSRF_COOKIE_AGE': [type(None), int],
     'CSRF_COOKIE_DOMAIN': [type(None), str],
     'CSRF_COOKIE_HTTPONLY': [bool],
+    'CSRF_COOKIE_MASKED': [bool],
     'CSRF_COOKIE_NAME': [str],
     'CSRF_COOKIE_PATH': [str],
     'CSRF_COOKIE_SAMESITE': [str],  # 'None' is a valid str value, so don't coerce to NoneType  # noqa: E501
@@ -105,6 +106,7 @@ _setting_types: Dict[str, List[type]] = {
     'PASSWORD_RESET_TIMEOUT_DAYS': [int],
     'PREPEND_WWW': [bool],
     'SECRET_KEY': [str],
+    'SECRET_KEY_FALLBACKS': [list],
     'SECURE_BROWSER_XSS_FILTER': [bool],
     'SECURE_CONTENT_TYPE_NOSNIFF': [bool],
     'SECURE_HSTS_INCLUDE_SUBDOMAINS': [bool],
