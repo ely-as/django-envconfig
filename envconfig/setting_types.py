@@ -32,6 +32,7 @@ _setting_types: Dict[str, List[type]] = {
     'DATABASE_ROUTERS': [list],
     'DATA_UPLOAD_MAX_MEMORY_SIZE': [type(None), int],
     'DATA_UPLOAD_MAX_NUMBER_FIELDS': [type(None), int],
+    'DATA_UPLOAD_MAX_NUMBER_FILES': [int],
     'DATETIME_FORMAT': [str],
     'DATETIME_INPUT_FORMATS': [list],
     'DATE_FORMAT': [str],
@@ -44,7 +45,7 @@ _setting_types: Dict[str, List[type]] = {
     'DEFAULT_CONTENT_TYPE': [str],  # deprecated v2.0, removed v3.0
     'DEFAULT_EXCEPTION_REPORTER': [str],
     'DEFAULT_EXCEPTION_REPORTER_FILTER': [str],
-    'DEFAULT_FILE_STORAGE': [str],
+    'DEFAULT_FILE_STORAGE': [str],  # deprecated v4.2
     'DEFAULT_FROM_EMAIL': [str],
     'DEFAULT_HASHING_ALGORITHM': [str],
     'DEFAULT_INDEX_TABLESPACE': [str],
@@ -138,9 +139,10 @@ _setting_types: Dict[str, List[type]] = {
     'SILENCED_SYSTEM_CHECKS': [list],
     'STATICFILES_DIRS': [list],
     'STATICFILES_FINDERS': [list],
-    'STATICFILES_STORAGE': [str],
+    'STATICFILES_STORAGE': [str],  # deprecated v4.2
     'STATIC_ROOT': [type(None), str],
     'STATIC_URL': [type(None), str],
+    'STORAGES': [dict],
     'TEMPLATES': [list],
     # 'TEMPLATE_DIRS': [list],  # deprecated v1.8, removed v1.10
     'TEST_NON_SERIALIZED_APPS': [list],
