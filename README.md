@@ -1,9 +1,10 @@
 # django-envconfig
 
 ![Test](https://github.com/ely-as/django-envconfig/workflows/Test/badge.svg)
-![Python](https://img.shields.io/pypi/pyversions/django-envconfig)
-![Django](https://img.shields.io/pypi/djversions/django-envconfig)
 ![License](https://img.shields.io/pypi/l/django-envconfig)
+
+![Django](https://img.shields.io/pypi/djversions/django-envconfig)
+![Python](https://img.shields.io/pypi/pyversions/django-envconfig)
 
 Configure Django using environment variables (envvars). `settings.py` optional.
 
@@ -84,3 +85,11 @@ such as `psql` or `pg_dump`.
   `settings.py` up to date between Django versions.
 - Use .env files for easy switching between environments/deployments
   (e.g. dev, test and prod).
+
+## Dependencies
+
+- [python-dotenv](https://github.com/theskumar/python-dotenv) (BSD 3-clause license)
+
+## License
+
+[MIT](https://github.com/ely-as/django-envconfig/blob/main/LICENSE).
