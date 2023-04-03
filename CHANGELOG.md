@@ -1,3 +1,7 @@
+## v0.2.7 (2023-04-03)
+### Features
+- Support Django 4.1.7 and 4.2 [#1](https://github.com/ely-as/django-envconfig/issues/1) by [@ely-as](https://github.com/ely-as) in [#4](https://github.com/ely-as/django-envconfig/pull/4).
+
 ## v0.2.6 (2022-11-09)
 ### Features
 - Added py311 support.
