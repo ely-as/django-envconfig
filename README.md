@@ -1,6 +1,6 @@
 # django-envconfig
 
-![Test](https://github.com/ely-as/django-envconfig/workflows/Test/badge.svg)
+[![Test](https://github.com/ely-as/django-envconfig/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ely-as/django-envconfig/actions/workflows/test.yml)
 ![License](https://img.shields.io/pypi/l/django-envconfig)
 
 ![Django](https://img.shields.io/pypi/djversions/django-envconfig)
