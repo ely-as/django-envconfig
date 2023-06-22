@@ -6,13 +6,9 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        python: ["3.8", "3.9", "3.10", "3.11"]
-        include:
-          - os: ubuntu-20.04
-            python: "3.6"
+        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
