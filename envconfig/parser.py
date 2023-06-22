@@ -59,7 +59,7 @@ class EnvParser:
         try:
             return json.loads(val)
         except JSONDecodeError:
-            raise ValueError("Invalid JSON")
+            raise ValueError("Invalid JSON") from None
 
     @classmethod
     def _list(cls, val: str) -> list:

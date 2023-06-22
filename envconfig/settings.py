@@ -64,7 +64,7 @@ for name in envsetting_names:
             raise ImproperlyConfigured(
                 f"Environment variable '{name}' incorrectly set. "
                 f"Error: {str(e)}. Valid types include: '{types_str}'."
-            )
+            ) from None
 
 # django-envconfig settings
 settings['INSTALLED_APPS'] = utils.modify_list(

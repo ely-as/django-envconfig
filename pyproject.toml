@@ -25,3 +25,18 @@ files = [
 [[tool.mypy.overrides]]
 module = "django.*"
 ignore_missing_imports = true
+
+[tool.ruff]
+select = [
+    "F",     # Pyflakes
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "B",     # flake8-bugbear
+    "C901",  # mccabe
+]
+ignore = [
+    "E501",  # line too long
+]
+
+[tool.ruff.mccabe]
+max-complexity = 10
