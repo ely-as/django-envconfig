@@ -15,20 +15,20 @@ from envconfig.setting_types import get_setting_types
 project_name = None
 extra_paths = []
 for arg in sys.argv:
-    if arg.endswith('.asgi:application') or arg.endswith('.wsgi'):
-        project_name = arg.split('.')[0]
+    if arg.endswith(".asgi:application") or arg.endswith(".wsgi"):
+        project_name = arg.split(".")[0]
         try:
             extra_paths.append(utils.get_base_dir(project_name))
         except ModuleNotFoundError:
             pass
-    if arg.endswith('manage.py'):
+    if arg.endswith("manage.py"):
         base_dir = Path(arg).parent.absolute()
         project_name = utils.find_project_name(base_dir)
         extra_paths.append(base_dir)
 
 load_dotenv(dotenv_path=find_dotenv(extra_paths=extra_paths))
 
-project_name = getenv('DJANGO_PROJECT', project_name)
+project_name = getenv("DJANGO_PROJECT", project_name)
 if not project_name:
     raise ImproperlyConfigured(
         "Could not find Django project (i.e. module with wsgi.py or asgi.py). "
@@ -45,12 +45,12 @@ settings.update(mod_settings)
 # Get a lookup of built-in Django settings and their valid types
 setting_types = get_setting_types()
 # Add any custom settings and their default types
-setting_types.update({
-    s: [type(mod_settings[s])] for s in mod_settings if s not in setting_types
-})
+setting_types.update(
+    {s: [type(mod_settings[s])] for s in mod_settings if s not in setting_types}
+)
 
-if project_name not in settings['INSTALLED_APPS']:
-    settings['INSTALLED_APPS'].append(project_name)
+if project_name not in settings["INSTALLED_APPS"]:
+    settings["INSTALLED_APPS"].append(project_name)
 
 envsetting_names = [s for s in setting_types if s in environ]
 
@@ -67,33 +67,33 @@ for name in envsetting_names:
             ) from None
 
 # django-envconfig settings
-settings['INSTALLED_APPS'] = utils.modify_list(
-    settings['INSTALLED_APPS'],
-    add=settings.get('ADD_INSTALLED_APPS', []),
-    remove=settings.get('REMOVE_INSTALLED_APPS', [])
+settings["INSTALLED_APPS"] = utils.modify_list(
+    settings["INSTALLED_APPS"],
+    add=settings.get("ADD_INSTALLED_APPS", []),
+    remove=settings.get("REMOVE_INSTALLED_APPS", []),
 )
 # Respect that MIDDLEWARE can be None
-if settings['MIDDLEWARE'] is not None or settings.get('ADD_MIDDLEWARE'):
-    settings['MIDDLEWARE'] = utils.modify_list(
-        settings.get('MIDDLEWARE') or [],
-        add=settings.get('ADD_MIDDLEWARE', []),
-        remove=settings.get('REMOVE_MIDDLEWARE', [])
+if settings["MIDDLEWARE"] is not None or settings.get("ADD_MIDDLEWARE"):
+    settings["MIDDLEWARE"] = utils.modify_list(
+        settings.get("MIDDLEWARE") or [],
+        add=settings.get("ADD_MIDDLEWARE", []),
+        remove=settings.get("REMOVE_MIDDLEWARE", []),
     )
 
 # PostgreSQL
 # https://www.postgresql.org/docs/current/libpq-envars.html
-if 'PGDATABASE' in settings:
-    settings['DATABASES'] = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': settings.get('PGDATABASE'),
-            'USER': settings.pop('PGUSER', ''),
-            'PASSWORD': settings.pop('PGPASSWORD', ''),
-            'HOST': settings.pop('PGHOST', ''),
-            'PORT': settings.pop('PGPORT', ''),
-            'TEST': {
-                'NAME': 'test_' + settings.pop('PGDATABASE'),
-            }
+if "PGDATABASE" in settings:
+    settings["DATABASES"] = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": settings.get("PGDATABASE"),
+            "USER": settings.pop("PGUSER", ""),
+            "PASSWORD": settings.pop("PGPASSWORD", ""),
+            "HOST": settings.pop("PGHOST", ""),
+            "PORT": settings.pop("PGPORT", ""),
+            "TEST": {
+                "NAME": "test_" + settings.pop("PGDATABASE"),
+            },
         }
     }
 

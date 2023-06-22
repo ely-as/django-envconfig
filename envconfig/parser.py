@@ -7,9 +7,9 @@ NoneType: type = type(None)
 
 class EnvParser:
     # case insensitive
-    bool_true_vals = ('1', 'on', 'true', 'yes')
-    bool_false_vals = ('0', 'off', 'false', 'no')
-    none_vals = ('none', 'null')
+    bool_true_vals = ("1", "on", "true", "yes")
+    bool_false_vals = ("0", "off", "false", "no")
+    none_vals = ("none", "null")
 
     @classmethod
     def parse(cls, val: str, *expected_types: type) -> Any:
@@ -20,7 +20,7 @@ class EnvParser:
         # Attempt to parse val as each type. If all fails raise last ValueError
         for i, type_ in enumerate(types_, start=1):
             try:
-                return getattr(cls, f'_{type_.__name__}')(val)
+                return getattr(cls, f"_{type_.__name__}")(val)
             except ValueError:
                 if i < len(types_):
                     pass
@@ -48,9 +48,9 @@ class EnvParser:
 
     @classmethod
     def _int(cls, val: str) -> int:
-        if val.startswith('0o'):
+        if val.startswith("0o"):
             return int(val, 8)
-        elif val.startswith('0x'):
+        elif val.startswith("0x"):
             return int(val, 16)
         return int(val)
 
@@ -63,9 +63,9 @@ class EnvParser:
 
     @classmethod
     def _list(cls, val: str) -> list:
-        if val.startswith('['):
+        if val.startswith("["):
             return cls._json(val)  # type: ignore  # noqa
-        return val.split(',')
+        return val.split(",")
 
     @classmethod
     def _NoneType(cls, val: str) -> None:

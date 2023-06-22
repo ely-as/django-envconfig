@@ -55,6 +55,7 @@ include = ["envconfig"]
 
 [project.optional-dependencies]
 test = [
+    "black",
     "mypy",
     "pytest",
     "pytest-cov",

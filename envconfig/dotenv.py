@@ -8,7 +8,7 @@ MAX_DEPTH: int = 10
 
 
 def find_dotenv(
-    filename: str = '.env',
+    filename: str = ".env",
     raise_error_if_not_found: bool = False,
     usecwd: bool = False,
     extra_paths: Optional[Sequence[Union[Path, str]]] = None,
@@ -44,5 +44,5 @@ def find_dotenv(
             if dotenv_path:
                 break
     if not dotenv_path and raise_error_if_not_found:
-        raise IOError('File not found')
+        raise IOError("File not found")
     return dotenv_path
