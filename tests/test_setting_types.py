@@ -1,6 +1,7 @@
 import pytest
 
 from envconfig.setting_types import get_setting_types
+
 from .utils import get_global_settings_types
 
 setting_types = get_setting_types()

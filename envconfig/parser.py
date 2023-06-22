@@ -1,6 +1,6 @@
-from typing import Any, Union
 import json
 from json.decoder import JSONDecodeError
+from typing import Any, Union
 
 NoneType: type = type(None)
 
@@ -59,7 +59,7 @@ class EnvParser:
         try:
             return json.loads(val)
         except JSONDecodeError:
-            raise ValueError("Invalid JSON")
+            raise ValueError("Invalid JSON") from None
 
     @classmethod
     def _list(cls, val: str) -> list:

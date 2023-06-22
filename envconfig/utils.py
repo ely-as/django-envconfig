@@ -1,6 +1,6 @@
 from importlib import import_module
 from importlib.machinery import SourceFileLoader
-from importlib.util import spec_from_loader, module_from_spec
+from importlib.util import module_from_spec, spec_from_loader
 from pathlib import Path
 from types import ModuleType
 from typing import List, Optional, Union
@@ -13,7 +13,7 @@ RELPATH_TO_SETTINGS_TPL = 'conf/project_template/project_name/settings.py-tpl'
 
 
 def find_project_name(path: Path) -> Optional[str]:
-    search = list(set(
+    search = list(set(  # noqa: C401
         p.parent.name for p in path.glob('*/[a|w]sgi.py')
         if p.parent.is_dir()
     ))
