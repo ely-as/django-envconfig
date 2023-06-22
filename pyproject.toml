@@ -31,8 +31,12 @@ select = [
     "F",     # Pyflakes
     "E",     # pycodestyle errors
     "W",     # pycodestyle warnings
+    "I",     # isort
     "B",     # flake8-bugbear
     "C901",  # mccabe
+]
+fixable = [
+    "I",     # isort
 ]
 ignore = [
     "E501",  # line too long

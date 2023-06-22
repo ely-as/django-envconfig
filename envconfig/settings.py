@@ -1,14 +1,14 @@
+import sys
 from os import environ, getenv
 from pathlib import Path
-import sys
 
 from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
+from envconfig import utils
 from envconfig.dotenv import find_dotenv
 from envconfig.parser import EnvParser
 from envconfig.setting_types import get_setting_types
-from envconfig import utils
 
 # Based on the command line arguments try and infer the project name and
 # the path to the base directory (to look for .env)

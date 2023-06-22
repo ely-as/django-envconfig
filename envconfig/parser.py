@@ -1,6 +1,6 @@
-from typing import Any, Union
 import json
 from json.decoder import JSONDecodeError
+from typing import Any, Union
 
 NoneType: type = type(None)
 
