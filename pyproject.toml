@@ -1,3 +1,27 @@
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+omit = [
+    # Omit Python environments
+    ".tox/*",
+    "*/dist-packages/*",
+    "*/site-packages/*",
+    # Files that should not be included in coverage
+    "*__init__.py*",
+    "*/tests*",
+    # Coverage cannot parse settings.py
+    "envconfig/settings.py",
+]
+
+[tool.mypy]
+warn_unused_configs = true
+files = [
+    "envconfig/**/*.py",
+    "tests/**/*.py",
+]
+
+[[tool.mypy.overrides]]
+module = "django.*"
+ignore_missing_imports = true
