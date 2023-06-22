@@ -13,7 +13,7 @@ RELPATH_TO_SETTINGS_TPL = 'conf/project_template/project_name/settings.py-tpl'
 
 
 def find_project_name(path: Path) -> Optional[str]:
-    search = list(set(
+    search = list(set(  # noqa: C401
         p.parent.name for p in path.glob('*/[a|w]sgi.py')
         if p.parent.is_dir()
     ))
