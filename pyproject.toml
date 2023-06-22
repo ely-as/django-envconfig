@@ -4,13 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.coverage.run]
 omit = [
-    # Omit Python environments
-    ".tox/*",
-    "*/dist-packages/*",
-    "*/site-packages/*",
-    # Files that should not be included in coverage
-    "*__init__.py*",
-    "*/tests*",
+    "tests/*",
     # Coverage cannot parse settings.py
     "envconfig/settings.py",
 ]
