@@ -1,3 +1,33 @@
+## v0.3.0 (2023-06-26)
+### Breaking Changes
+- Dropped support for Python 3.6. End of life for Python 3.6 was 2021-12-23 (see the
+  [Status of Python Versions](https://devguide.python.org/versions/)).
+
+### Fixes
+- Added `py.typed` file to indicate that package is type-enabled
+  ([f27cd0e](https://github.com/ely-as/django-envconfig/commit/f27cd0e)).
+
+### Internal
+- Set the minimum required version of tox to `>=4.0`and used the labels feature to tell
+  GitHub Actions which testenvs to run
+  ([255bd20](https://github.com/ely-as/django-envconfig/commit/255bd20)).
+- Removed `{posargs}` from tox commands
+  ([b93de2d](https://github.com/ely-as/django-envconfig/commit/b93de2d)).
+- Switched to pyproject.toml for all setuptools and test tool configuration by @ely-as
+  in [#14](https://github.com/ely-as/django-envconfig/pull/14).
+- Switched from flake8 to ruff for linting and fixed `B904` errors
+  ([9007bc7](https://github.com/ely-as/django-envconfig/commit/9007bc7)).
+- Began to use isort formatting rules using ruff and added new tox testenv `format`
+  ([8600a04](https://github.com/ely-as/django-envconfig/commit/8600a04)).
+- Replaced `{toxinidir}` with `{tox_root}` in tox.ini
+  ([22a8982](https://github.com/ely-as/django-envconfig/commit/22a8982)).
+- Dropped support for Python 3.6 by @ely-as in
+  [#17](https://github.com/ely-as/django-envconfig/pull/17).
+- Began to use black for code formatting
+  ([773c838](https://github.com/ely-as/django-envconfig/commit/773c838)).
+- Configured tox to generate JSON coverage reports and GitHub Actions to upload reports
+  to cov.ely.as ([b542b1b](https://github.com/ely-as/django-envconfig/commit/b542b1b)).
+
 ## v0.2.7 (2023-04-03)
 ### Features
 - Support Django 4.1.7 and 4.2 [#1](https://github.com/ely-as/django-envconfig/issues/1) by [@ely-as](https://github.com/ely-as) in [#4](https://github.com/ely-as/django-envconfig/pull/4).
