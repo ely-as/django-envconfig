@@ -58,7 +58,7 @@ test = [
     "black",
     "mypy",
     "pytest",
-    "pytest-cov",
+    "pytest-cov>=4.1",
     "pytest-mock",
     "ruff",
 ]

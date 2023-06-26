@@ -22,3 +22,10 @@ jobs:
           pip install tox
       - name: Run tests
         run: tox -m ${{ matrix.python }}
+      - name: Upload coverage report
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.COV_ELYAS_TOKEN }}" \
+          -F file=@coverage.json \
+          https://cov.ely.as/github/${{ github.repository }}/${{ github.ref_name }}/
+        if: ${{ github.ref_name == 'main' }}
