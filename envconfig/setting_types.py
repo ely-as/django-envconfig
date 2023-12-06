@@ -76,6 +76,7 @@ _setting_types: Dict[str, List[type]] = {
     "FORCE_SCRIPT_NAME": [type(None), str],
     "FORMAT_MODULE_PATH": [type(None), str, list],
     "FORM_RENDERER": [str],
+    "FORMS_URLFIELD_ASSUME_HTTPS": [bool],  # deprecated v5.0
     "IGNORABLE_404_URLS": [list],
     "INSTALLED_APPS": [list],
     "INTERNAL_IPS": [list],
