@@ -1,3 +1,7 @@
+## v0.3.1 (2023-12-06)
+### Features
+- Added support for Python 3.12 and Django 5.0 [#19](https://github.com/ely-as/django-envconfig/issues/19) by [@ely-as](https://github.com/ely-as) in [#20](https://github.com/ely-as/django-envconfig/pull/20).
+
 ## v0.3.0 (2023-06-26)
 ### Breaking Changes
 - Dropped support for Python 3.6. End of life for Python 3.6 was 2021-12-23 (see the
