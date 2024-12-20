@@ -1,3 +1,14 @@
+## v0.4.0 (2024-12-20)
+### Breaking Changes
+- Dropped support for Python 3.7. End of life for Python 3.7 was 2023-06-27 (see the
+  [Status of Python Versions](https://devguide.python.org/versions/)).
+- Dropped support for Python 3.8. End of life for Python 3.8 was 2024-10-07 (see the
+  [Status of Python Versions](https://devguide.python.org/versions/)).
+- Dropped support for Django 1.11, 2.0 and 2.1 since these versions do not support Python 3.9 or higher.
+
+### Features
+- Added support for Python 3.13 and Django 5.1 [#21](https://github.com/ely-as/django-envconfig/issues/21) by [@ely-as](https://github.com/ely-as) in [#22](https://github.com/ely-as/django-envconfig/pull/22).
+
 ## v0.3.1 (2023-12-06)
 ### Features
 - Added support for Python 3.12 and Django 5.0 [#19](https://github.com/ely-as/django-envconfig/issues/19) by [@ely-as](https://github.com/ely-as) in [#20](https://github.com/ely-as/django-envconfig/pull/20).
